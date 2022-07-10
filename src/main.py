@@ -9,13 +9,13 @@ while True:
 
     # Capturing frame-by-frame
     ret, frame = stream.read()
-    gray_img = classifier.colorConvertion(frame, gray=True)
+    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Classifier
-    classifier.faceDetection(frame)
+    faces, auth = classifier.faceDetection(image=gray_frame)
 
     # Display the result of capture
-    cv2.imshow('Frame', frame)
+    cv2.imshow('Face Recognizer', faces)
 
     # Waiting press a key to quit the program
     if cv2.waitKey(20) & 0xFF == ord('q'):
