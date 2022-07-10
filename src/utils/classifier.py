@@ -34,7 +34,7 @@ class CascadeClassifier():
             
             labels = recognizer.labelPickle()
 
-            if conf >= 45 and conf <= 85:
+            if conf >= 45:# and conf <= 85:
                 print(f"Recognized: {labels[id_]}")
                 auth_variable = True
             print(auth_variable)
