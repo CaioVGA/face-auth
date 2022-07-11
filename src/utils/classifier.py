@@ -39,6 +39,7 @@ class CascadeClassifier():
 
             if conf >= 45:# and conf <= 85:
                 print(f"Recognized: {labels[id_]}, conf: {conf}")
+                recognizer.putTextLabel(frame=image, name=labels[id_], cord=[x,y])
                 auth_variable = True
             print(auth_variable)
             # img_item = f"src/images/{labels[id_]}/img{randint(0,100)}.png"
@@ -66,3 +67,10 @@ class FaceRecognizer():
             og_labels = pickle.load(file)
             labels = {v:k for k,v in og_labels.items()}
         return labels
+
+    def putTextLabel(self, frame, name, cord: list):
+
+        font = cv2.FONT_HERSHEY_SIMPLEX
+        color = (255, 255, 255)
+        stroke = 2
+        cv2.putText(frame, name, (cord[0], cord[1]), font, 1, color, stroke, cv2.LINE_AA)
