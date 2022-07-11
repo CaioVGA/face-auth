@@ -1,3 +1,4 @@
+from random import randint
 import cv2
 import pickle
 
@@ -23,23 +24,26 @@ class CascadeClassifier():
         return rectangle
 
     def faceDetection(self, image, auth_variable=False):
-        recognizer = FaceRecognizer()
 
+        recognizer = FaceRecognizer()
+        gray_frame = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         faces = self.cascade.detectMultiScale(image, scaleFactor=1.5, minNeighbors=5)
 
         for (x, y, w, h) in faces:
 
-            roi = image[y:y+h, x:x+w]  # (ycord_start, ycord_end)
-            id_, conf = recognizer.prediction(roi)
+            roi_gray = gray_frame[y:y+h, x:x+w]  # (ycord_start, ycord_end)
+            roi_color = image[y:y+h, x:x+w]  # (ycord_start, ycord_end)
+            id_, conf = recognizer.prediction(roi_gray)
             
             labels = recognizer.labelPickle()
 
             if conf >= 45:# and conf <= 85:
-                print(f"Recognized: {labels[id_]}")
+                print(f"Recognized: {labels[id_]}, conf: {conf}")
                 auth_variable = True
             print(auth_variable)
-            img_item = f"images/last-face/face.png"
-            cv2.imwrite(img_item, roi)
+            # img_item = f"src/images/{labels[id_]}/img{randint(0,100)}.png"
+            img_item = f"src/images/last-face/img.png"
+            cv2.imwrite(img_item, roi_color)
             self.rectangleDraw(frame=image, cord=[x, y, w, h])
 
         return image, auth_variable
