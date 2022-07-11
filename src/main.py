@@ -9,10 +9,9 @@ while True:
 
     # Capturing frame-by-frame
     ret, frame = stream.read()
-    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Classifier
-    faces, auth = classifier.faceDetection(image=gray_frame)
+    faces, auth = classifier.faceDetection(image=frame)
 
     # Display the result of capture
     cv2.imshow('Face Recognizer', faces)
