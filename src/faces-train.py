@@ -19,7 +19,7 @@ y_labels = list()
 
 for root, dirs, files in os.walk(image_dir):
     for file in files:
-        if file.endswith("png") or file.endswith("jpg"):
+        if file.endswith("png") or file.endswith("jpg") or file.endswith("jpeg"):
             path = os.path.join(root, file)
             label = os.path.basename(root).replace(" ", "-").lower()
             if not label in label_ids:
@@ -30,7 +30,9 @@ for root, dirs, files in os.walk(image_dir):
             # x_train.append(path) 
             # y_labels.append(label)
             pil_image = Image.open(path).convert("L") # grayscale
-            image_array = np.array(pil_image, "uint8")
+            size = (550, 550)
+            final_image = pil_image.resize(size, Image.Resampling.LANCZOS)
+            image_array = np.array(final_image, "uint8")
             # print(image_array)
             faces = face_cascade.detectMultiScale(image_array, scaleFactor=1.5, minNeighbors=5)
 
