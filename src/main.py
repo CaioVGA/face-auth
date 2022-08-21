@@ -3,23 +3,25 @@ from utils.classifier import CascadeClassifier
 
 
 classifier = CascadeClassifier()
+# instancia da captura de video
 stream = cv2.VideoCapture(0)
 
+# inicializacao do loop infinito
 while True:
 
-    # Capturing frame-by-frame
+    # leitura das imagens fornecidas pela camera
     ret, frame = stream.read()
 
-    # Classifier
+    # aplicacao da imagem da camera para o modelo
     faces, auth = classifier.faceDetection(image=frame)
 
-    # Display the result of capture
+    # mostra a saída com o reconhecimento facial
     cv2.imshow('Face Recognizer', faces)
 
-    # Waiting press a key to quit the program
+    # condicional para quebra do loop infinito
     if cv2.waitKey(20) & 0xFF == ord('q'):
         break
 
-# Release the capture
+# liberacao da camera e fecha as janelas
 stream.release()
 cv2.destroyAllWindows()
