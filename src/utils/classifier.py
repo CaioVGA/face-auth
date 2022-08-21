@@ -31,7 +31,7 @@ class CascadeClassifier():
             
             labels = recognizer.labelPickle()
 
-            if conf >= 4 and conf <= 85:
+            if conf >= 60 and conf <= 90:
                 print(f"Recognized: {labels[id_]}, conf: {conf}")
                 editor.putTextLabel(frame=image, name=labels[id_], cord=[x,y])
                 auth_variable = True
