@@ -1,6 +1,6 @@
 import cv2
-from .utils.classifier import CascadeClassifier
-from ..raspberry.gpioControl import RaspPinout
+from utils.classifier import CascadeClassifier
+from raspberry.gpioControl import RaspPinout
 
 # instancia do classificador e da Raspberry
 classifier = CascadeClassifier()
