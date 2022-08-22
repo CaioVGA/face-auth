@@ -1,8 +1,10 @@
 import cv2
-from utils.classifier import CascadeClassifier
+from .utils.classifier import CascadeClassifier
+from ..raspberry.gpioControl import RaspPinout
 
-
+# instancia do classificador e da Raspberry
 classifier = CascadeClassifier()
+rasp = RaspPinout()
 # instancia da captura de video
 stream = cv2.VideoCapture(0)
 
@@ -14,7 +16,7 @@ while True:
 
     # aplicacao da imagem da camera para o modelo
     faces, auth = classifier.faceDetection(image=frame)
-
+    rasp.control(authentication=auth)
     # mostra a saída com o reconhecimento facial
     cv2.imshow('Face Recognizer', faces)
 
