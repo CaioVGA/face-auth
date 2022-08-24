@@ -31,7 +31,7 @@ class CascadeClassifier():
             
             labels = recognizer.labelPickle()
 
-            if conf >= 60 and conf <= 90:
+            if conf >= 65 and conf <= 90:
                 print(f"Recognized: {labels[id_]}, conf: {conf}")
                 editor.putTextLabel(frame=image, name=labels[id_], cord=[x,y])
                 auth_variable = True
@@ -49,7 +49,7 @@ class CascadeClassifier():
 
     def subItemsDetection(self, classifier, bgr_image, gray_image, region_draw=False): 
 
-        subitem = classifier.detectMultiScale(gray_image, scaleFactor=1.5, minNeighbors=5)
+        subitem = classifier.detectMultiScale(gray_image, scaleFactor=1.5, minNeighbors=8)
         
         if region_draw is True:
             for (x, y, w, h) in subitem:
