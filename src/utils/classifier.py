@@ -6,7 +6,8 @@ from utils.recognizer import FaceRecognizer
 from utils.editor import ImageEditor
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read("trainning.yml")
+#recognizer.read("trainning.yml")
+recognizer.read("/home/pi/face-auth/trainning.yml")
 editor = ImageEditor()
 
 class CascadeClassifier():

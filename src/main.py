@@ -1,4 +1,6 @@
 import cv2
+from time import time
+from imutils.video import VideoStream, FPS
 from utils.classifier import CascadeClassifier
 from raspberry.gpioControl import RaspPinout
 
@@ -6,13 +8,15 @@ from raspberry.gpioControl import RaspPinout
 classifier = CascadeClassifier()
 rasp = RaspPinout()
 # instancia da captura de video
-stream = cv2.VideoCapture(0)
+stream = VideoStream(src=0).start()
+time.sleep(1)
+fps = FPS.start()
 
 # inicializacao do loop infinito
 while True:
 
     # leitura das imagens fornecidas pela camera
-    ret, frame = stream.read()
+    frame = stream.read()
 
     # aplicacao da imagem da camera para o modelo
     faces, auth = classifier.faceDetection(image=frame)
